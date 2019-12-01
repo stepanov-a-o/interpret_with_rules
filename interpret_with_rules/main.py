@@ -2,6 +2,7 @@ from data_proc.dataset.newsgroups import get_featurized_data
 from data_proc.training import train_baseline
 from data_proc.prediction import pred_baseline
 from evaluation.score import get_f1_score
+from evaluation.score import get_accuracy_score
 from dataset_rules import get_reduced_train_input
 from gradient_rules import get_model_transformed_input
 from data_proc.training import train_nn, load_nn
@@ -77,9 +78,11 @@ def main(dataset = 'newsgroups', get_baseline = True, test_type = 'test',
         if test_type == 'val':
             y_val_pred, __ = pred_nn(net, x_val)
             print("Macro average F-score of neural net on validation data: ", get_f1_score(y_val, y_val_pred))
+            print("Accuracy of neural net on validation data: ", get_accuracy_score(y_val, y_val_pred) * 100,"%")
 
         y_test_pred, __ = pred_nn(net, x_test)
         print("Macro average F-score of neural net on test data: ", get_f1_score(y_test, y_test_pred))
+        print("Accuracy of neural net on validation data: ", get_accuracy_score(y_val, y_val_pred) * 100,"%")
 
         if feat_sel_algo not in ['sa', 'mi']:
             print("Unsupported feature selection algorithm passed. Use (sa|mi). Using sensitivity analysis by default.")
