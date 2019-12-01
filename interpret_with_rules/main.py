@@ -6,8 +6,10 @@ from dataset_rules import get_reduced_train_input
 from gradient_rules import get_model_transformed_input
 from data_proc.training import train_nn, load_nn
 from data_proc.prediction import pred_nn
-from rule_induction.jrip import induce_ripper_rules
-
+#from rule_induction.jrip import induce_ripper_rules # to use RIPPER-k rule
+# induction algorithm
+from rule_induction.furia import induce_furia_rules # to use FURIA rule 
+# induction algorithm
 import argparse
 
 def main(dataset = 'newsgroups', get_baseline = True, test_type = 'test',
@@ -21,8 +23,17 @@ def main(dataset = 'newsgroups', get_baseline = True, test_type = 'test',
     if dataset == 'newsgroups':
         print("Getting featurized data for newsgroups dataset")
 
-        # cats = ['alt.atheism', 'soc.religion.christian']
-        cats = ['sci.crypt', 'sci.electronics', 'sci.med', 'sci.space']
+        # Set 1. 
+        '''cats = ['comp.sys.ibm.pc.hardware', 'rec.autos', 'talk.politics.guns', 
+                'soc.religion.christian']'''
+        
+        # Set 2. 
+        cats = ['comp.sys.ibm.pc.hardware', 'comp.sys.mac.hardware', 'rec.autos', 
+                'rec.motorcycles', 'talk.politics.guns', 'talk.politics.mideast', 
+                'alt.atheism', 'soc.religion.christian']
+
+        # Default
+        '''cats = ['sci.crypt', 'sci.electronics', 'sci.med', 'sci.space']'''
 
         vocab_dict, class_labels, x_train, x_val, x_test, y_train, y_val, y_test = get_featurized_data(
             is_select_best=False, cats = cats)
@@ -43,7 +54,7 @@ def main(dataset = 'newsgroups', get_baseline = True, test_type = 'test',
         data_prefix = dataset
         get_reduced_train_input(x_train, y_train, vocab_dict, class_labels, data_prefix, data_dir )
 
-        induce_ripper_rules(data_prefix + '-mi-train-gold.arff', data_dir=data_dir)
+        induce_furia_rules(data_prefix + '-mi-train-gold.arff', data_dir=data_dir)
 
     elif rule_type == 'gradient':
         print("Inducing rules from the data reweighed according to feature importance in a neural network")
@@ -81,10 +92,10 @@ def main(dataset = 'newsgroups', get_baseline = True, test_type = 'test',
                                     data_dir = data_dir,
                                     x_train=x_train, y_train=y_train) #last parameter is optional for SA when train rules are not required
 
-        induce_ripper_rules(data_prefix + '-reweighed-' + feat_sel_algo + '-test-pred.arff', data_dir =  data_dir)
+       induce_furia_rules(data_prefix + '-reweighed-' + feat_sel_algo + '-test-pred.arff', data_dir =  data_dir)
         
         if get_train_rules:
-            induce_ripper_rules(data_prefix + '-reweighed-' + feat_sel_algo + '-train-gold.arff', data_dir=data_dir)
+            induce_furia_rules(data_prefix + '-reweighed-' + feat_sel_algo + '-train-gold.arff', data_dir=data_dir)
 
 
 def run_baseline(x_train, y_train, x_test, y_test, test_type, fout, dir_out):
@@ -114,7 +125,7 @@ if __name__ == '__main__':
                         help = "True to load a pretrained model, False otherwise.")
 
     parser.add_argument("-m", dest = 'modelname',
-                        nargs='?', const = 'nn-model.tar',
+                        nargs='?', const = 'f_gradient_1000_29.11.tar',
                         help="Pretrained model name. If unavailable, new model will be saved with this name.",
                         required=True, default = 'nn-model.tar')
 
