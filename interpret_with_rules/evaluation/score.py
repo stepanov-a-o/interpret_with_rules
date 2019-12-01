@@ -9,3 +9,6 @@ def get_f1_score(y_true, y_pred, avg = 'macro'):
     :return: F1 score
     """
     return f1_score(y_true = y_true, y_pred = y_pred, average=avg)
+
+def get_accuracy_score(y_true, y_pred):
+    return accuracy_score(y_true = y_true, y_pred = y_pred)
