@@ -172,32 +172,6 @@ def build_classifier(data, cls, incremental = False, loader = None):
 
     return cls
 
-# You can experiment further using the code below
-'''
-# To output instances, their classes and their class distributions
-for index, inst in enumerate(data):
-    pred = FURIA.classify_instance(inst)
-    dist = FURIA.distribution_for_instance(inst)
-    print(str(index+1) + ": label index=" + str(pred) + ", class distribution=" + str(dist))
-
-# Retrieve rule set and get number of rules
-jRuleSet = FURIA.jwrapper.getRuleset()
-print "Number of rules: ",jRuleSet.size()
-
-# Gets first rule, prints rule confidence
-jRule = jRuleSet.get(0)
-jRule.getConfidence()
-
-# Checks if rule covers instance 
-jRule.covers(data.get_instance(0)) # I have this, if you will have error try this!!!
-=> jRule.covers(data.get_instance(0).jobject)
-
-As a check, the model does classify that same data instance
-FURIA.classify_instance(data.get_instance(0))
-
-Source: https://groups.google.com/forum/#!searchin/python-weka-wrapper/FURIA|sort:date/python-weka-wrapper/z0oKOm0trwo/g3XBoaJ2BQAJ
-'''
-
 def evaluate_classifier(cls, data, crossvalidate = False, n_folds = 10):
     """
     Evaluation
@@ -237,11 +211,11 @@ def optimize_rule_params(data, incremental, dataloader, class_index = None):
     # start_n = math.floor(0.01*min_inst)
     start_n = 2
     # seeds = np.random.randint(0, 5000, 50)
-    seeds = np.arange(0, 1, 1) # analyzing performance for 50 seeds (for RIPPER-k)
+    seeds = np.arange(0, 10, 1) # analyzing performance for 50 seeds (for RIPPER-k)
 
     for seed in seeds:
         # seed = int(seed)
-        for n in tqdm(range(start_n, min_inst, 1)): # 200 insted of min_inst
+        for n in tqdm(range(start_n, min_inst, 1)): 
 
             cls = get_classifier(n, seed)
             cls = build_classifier(data, cls, incremental, dataloader)
