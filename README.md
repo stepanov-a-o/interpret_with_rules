@@ -1,30 +1,32 @@
-This project induces rules to explain the predictions of a trained neural network, and optionally also to explain the patterns that the model captures from the training data, and the patterns that are present in the original dataset. This code corresponds to the paper:
+## Fuzzy Unordered Rule Induction Algorithm for Interpretable Multi-class Neural Networks
 
-**Rule Induction for global explanation of trained models** <br/>
-Madhumita Sushil, Simon Šuster and Walter Daelemans <br/>
-Workshop on *Analyzing and interpreting neural networks for NLP (BlackboxNLP)*, EMNLP 2018
+The code in this repository corresponds to a master thesis project. The thesis topic is 'Fuzzy Unordered Rule Induction Algorithm for Interpretable Multi-class Neural Networks'. The thesis goal is to compare the performance of Fuzzy Unordered Rule Induction Algorithm (FURIA) and Repeated Incremental Pruning to Produce Error Reduction (RIPPER-k) rule induction algorithm on subsets of scikit-learn the 20 newsgroups text dataset.  
 
+The most relevant and recent work in this field is the paper ‘Rule induction for global explanation of trained models’ by Sushil, Šuster and Daelemans (2018). The code in this repository builds upon that work, therefore I want to acknowledge authors contribution and give credits for their code. 
 
-The packages required are listed in `requirements.txt`. These dependencies must be satisfied to use the code.
+To read the authors paper, please refer to Sushil, M., Šuster, S., & Daelemans, W. (2018). Rule induction for global explanation of trained models. arXiv preprint arXiv:1808.09744. The link to the code for the paper is https://github.com/clips/interpret_with_rules
 
-The code uses python3, and can be run as follows:
+## Useful commands 
 
-To first train a neural document classifier (for the Science categories in the 20 newsgroups dataset) and then induce rules to explain the classifier's predictions, the following command is used:
-
+The command to induce rules from a pre-trained model is: 
 ```
-python3 main.py -r gradient -loadmodel False -m <modelname.tar>
+python3 main.py -r gradient -loadmodel True -m nn-model.tar
 ```
+where nn-model.tar is the name of the pre-trained model.
 
-If we want to induce rules to explain a pretrained network, we can set the `loadmodel` option to `True` and input the pretrained model name. For replicating the exact results of the paper, we have provided the model we have explained under the name `nn-model.tar`.
-
-To induce rules to identify the patterns in the original training data, the following command is used:
-
+The command to induce rules from the original training data is
 ```
 python3 main.py -r trainset -loadmodel False -m
 ```
 
-The complete description of options can be checked by using the `--help` option like:
+The command to train a neural network on scikit-learn 20 newsgroups text dataset and then induce rules to interpret classifier's prediction is:  
+```
+python3 main.py -r gradient -loadmodel False -m nn-model.tar
+```
 
+To get a complete list of all commands and options, please use: 
 ```
 python3 main.py --help
 ```
+
+To use the code with other datasets, please note that Weka needs the data to be present in ARFF or XRFF format to perform any classification tasks.
