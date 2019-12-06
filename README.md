@@ -21,7 +21,7 @@ python3 main.py -r trainset -loadmodel False -m
 
 The command to train a neural network on scikit-learn 20 newsgroups text dataset and then induce rules to interpret classifier's prediction is:  
 ```
-python3 main.py -r gradient -loadmodel False -m nn-model.tar
+python3 main.py -r gradient -loadmodel False -m your_model_name.tar
 ```
 
 To get a complete list of all commands and options, please use: 
