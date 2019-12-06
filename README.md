@@ -10,9 +10,9 @@ To read the authors paper, please refer to Sushil, M., Šuster, S., & Daelemans,
 
 The command to induce rules from a pre-trained model is: 
 ```
-python3 main.py -r gradient -loadmodel True -m nn-model.tar
+python3 main.py -r gradient -loadmodel True -m your_model_name.tar
 ```
-where nn-model.tar is the name of the pre-trained model.
+where your_model_name.tar is the name of the pre-trained model.
 
 The command to induce rules from the original training data is
 ```
