@@ -10,7 +10,7 @@ For novice users, I recommend using Anaconda-Navigator (https://www.anaconda.com
 
 2. Numpy, scipy and scikit-learn == 0.19.1. Those libraries are pre-installed in Anaconda. 
 
-3. Xcode Command Line Tools. Run 'xcode-select --install' in the terminal to install Command Line Tools. If you will have questions, this forum discussion can help https://stackoverflow.com/questions/52522565/git-is-not-working-after-macos-update-xcrun-error-invalid-active-developer-pa.
+3. Xcode Command Line Tools. Run 'xcode-select --install' in the terminal to install Command Line Tools. If you have questions, this forum discussion can help https://stackoverflow.com/questions/52522565/git-is-not-working-after-macos-update-xcrun-error-invalid-active-developer-pa.
 
 4. Pytorch library (torch == 0.4.0). You can use "conda install pytorch=0.4.0 -c pytorch" command in the terminal. 
 
@@ -22,6 +22,6 @@ For novice users, I recommend using Anaconda-Navigator (https://www.anaconda.com
     
     To get specifications, run 'java -version' in the terminal. For all questions and troubleshooting please refer to                   https://github.com/LeeKamentsky/python-javabridge. This page can also be useful to set JAVA_HOME on MAC                      http://www.sajeconsultants.com/how-to-set-java_home-on-mac-os-x/. 
 
-6. Python weka wrapper 3 library. You can use 'python-weka-wrapper3' command in the terminal. For WEKA troubleshooting please refer to https://fracpete.github.io/python-weka-wrapper/troubleshooting.html.
+6. Python weka wrapper3 library. You can use 'python-weka-wrapper3' command in the terminal. For WEKA troubleshooting, please refer to https://fracpete.github.io/python-weka-wrapper/troubleshooting.html.
 
 7. Fuzzy Unordered Rule Induction (FURIA) algorithm. FURIA is not part of the python-weka-wrapper standard distribution. Download FURIA from http://weka.sourceforge.net/packageMetaData/fuzzyUnorderedRuleInduction/index.html. Note that when you download and unzip the folder, you will need to find 'fuzzyUnorderedRuleInduction.jar' file and copy it to 'lib' folder within the path for weka. In my case, the path to the folder is /Applications/anaconda2/envs/py36-dev/lib/python3.6/site-packages/weka. 
