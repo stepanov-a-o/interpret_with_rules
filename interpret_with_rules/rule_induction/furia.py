@@ -102,7 +102,8 @@ def merge_classes(data, idx_to_merge):
     return filtered_data
     
 def get_classifier(min_no, seed):
-    cls = Classifier(classname = "weka.classifiers.rules.FURIA")
+    cls = Classifier(classname = "weka.classifiers.rules.FURIA", 
+		     options = ["-F", "6", "-N","2.0","-O","2","-S","1234","-p","0","-s","2"])
     '''    
     Return the classifier object given the options
     :param min_no: Minimum number of instances correctly covered by JRIP
@@ -137,18 +138,7 @@ def get_classifier(min_no, seed):
     in the model (default 2).
 
     -batch-size	the desired batch size for batch prediction  (default 100).
-    '''
-    
-    options = list()
-   
-    #options.append('-F')
-    #options.append('-N')
-    options.append(str(min_no))
-    #options.append('-S')
-    options.append(str(seed))
-
-    cls.options = options
-    
+    ''' 
     return cls
 
 def build_classifier(data, cls, incremental = False, loader = None):
@@ -210,8 +200,7 @@ def optimize_rule_params(data, incremental, dataloader, class_index = None):
 
     # start_n = math.floor(0.01*min_inst)
     start_n = 2
-    # seeds = np.random.randint(0, 5000, 50)
-    seeds = np.arange(0, 10, 1) # analyzing performance for 50 seeds (for RIPPER-k)
+    seeds = np.arange(0, 1, 1)
 
     for seed in seeds:
         # seed = int(seed)
@@ -273,7 +262,7 @@ def induce_furia_rules(data_file, data_dir='../data/', out_file = 'furia_rules.o
         n_classes = data.get_instance(0).num_classes
         print("Found {} classes".format(n_classes))
 
-        if n_classes > 2: #one vs rest setup for more than 2 classes
+        if n_classes > 8: # input 2 for one vs rest setup for more than 2 classes
             class_list = [str(i) for i in range(1, n_classes+1, 1)]
             for to_merge in combinations(class_list, n_classes-1):
                 print("Merging classes ", to_merge)
