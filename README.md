@@ -1,6 +1,6 @@
 ## RIPPER-k and FURIA Rule Induction Algorithms for Interpretable Multiclass Classification
 
-The code in this repository corresponds to a master thesis project. The thesis topic is 'RIPPER-k and FURIA Rule Induction Algorithms for Interpretable Multi-class Classification'. The thesis goal is to compare the interpretability of Fuzzy Unordered Rule Induction Algorithm (FURIA) and Repeated Incremental Pruning to Produce Error Reduction (RIPPER-k) rule induction algorithm on subsets of scikit-learn the 20 newsgroups text dataset.  
+The code in this repository corresponds to a master thesis project. The thesis topic is 'RIPPER-k and FURIA for Interpreting the Output of a Multiclass Neural Network'. The thesis goal is to compare the interpretability of Fuzzy Unordered Rule Induction Algorithm (FURIA) and Repeated Incremental Pruning to Produce Error Reduction (RIPPER-k) rule induction algorithm on subsets of scikit-learn the 20 newsgroups text dataset.  
 
 The most relevant and recent work in this field is the paper ‘Rule induction for global explanation of trained models’ by Sushil, Šuster and Daelemans (2018). The code in this repository builds upon that work; therefore, I want to acknowledge authors contribution and credit their work.
 
